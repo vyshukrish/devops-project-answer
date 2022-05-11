@@ -8,6 +8,14 @@ pipeline {
 
     stages {
         
+        
+        stage('Maven Build') {
+            steps {
+              sh "mvn clean package"
+               
+            }
+        }
+        
         stage('Build Image') {
             steps {
                 echo 'Building Docker Image'
@@ -17,7 +25,7 @@ pipeline {
             }
         }
         
-        stage('Deploy Image') {
+        stage('Pushing Image to Docker-Hub') {
             steps {
                 echo 'Pushing Docker Image'
                 script {
