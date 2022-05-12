@@ -1,6 +1,6 @@
 pipeline {
     environment { 
-        registry = "vyshnavireddy572/project" 
+        registry = "project.nexus.com:8090/project" 
         registryCredential = 'docker-hub' 
         dockerImage = '' 
     }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Pushing Docker Image'
                 script {
-                   docker.withRegistry( '', registryCredential ) {
+                   docker.withRegistry( 'http://project.nexus.com:8090', registryCredential ) {
                    dockerImage.push("$BUILD_NUMBER")
                    dockerImage.push('latest')
                   }
